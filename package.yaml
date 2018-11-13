@@ -1,0 +1,52 @@
+name:                pfds
+version:             0.0.1.0
+github:              "darlliu/pfds"
+license:             GPL-3
+author:              "darlliu"
+maintainer:          "darlliu@outlook.com"
+copyright:           "SEE LICENSE"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/darlliu/pfds#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies:
+  ghc-options:
+  - -O2
+
+executables:
+  pfds:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -O2
+    - -with-rtsopts=-N
+    dependencies:
+    - pfds
+
+tests:
+  test-pfds:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -O2
+    - -with-rtsopts=-N
+    dependencies:
+    - HUnit
