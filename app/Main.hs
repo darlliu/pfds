@@ -1,6 +1,5 @@
 module Main where
-
-import Lib
+import PurelyFunctional
 
 main :: IO ()
-main = someFunc
+main = putStrLn "Hello, World"

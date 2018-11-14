@@ -23,7 +23,7 @@ dependencies:
 
 library:
   source-dirs: src
-  dependencies:
+  # dependencies:
   ghc-options:
   - -O2
 
@@ -49,4 +49,5 @@ tests:
     - -O2
     - -with-rtsopts=-N
     dependencies:
+    - pfds
     - HUnit
