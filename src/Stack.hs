@@ -11,7 +11,7 @@ class Stack s where
     head :: s a -> a
     tail :: s a -> s a 
 
-data List a = Empty | MyCons a (List a)
+data List a = Empty | Wrapped a (List a)
     deriving (Show, Read, Ord, Eq)
 
 
@@ -21,11 +21,16 @@ instance Stack List where
         Empty -> True
         _ -> False
     cons a s = case s of
-        Empty -> MyCons a Empty
-        s' -> MyCons a s'
-    head (MyCons a _)  = a
+        Empty -> Wrapped a Empty
+        s' -> Wrapped a s'
+    head (Wrapped a _) = a
+    tail (Wrapped _ s) = s
     tail Empty = empty
-    tail (MyCons _ s) = s
 
 singleton :: a -> List a
 singleton a = cons a Empty
+
+
+powerset :: List a -> List (List a)
+powerset Empty = Empty
+powerset xs = xs `cons` (powerset $ tail xs)
