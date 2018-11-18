@@ -1,7 +1,9 @@
 module PurelyFunctional
 (
- module Stack   
+ module Stack,
+ module Set
 )
 where
 import Stack
+import Set
 ;
