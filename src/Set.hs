@@ -1,33 +1,33 @@
 module Set 
 where
-import Prelude hiding (empty, isEmpty, cons, head, tail)
+import Prelude hiding (empty, isEmpty, cons, head, tail, null)
 
 class Set s where
-    nullset :: s a
+    null :: s a
     member :: (Ord a) => s a -> a -> Bool
     insert :: (Ord a) => s a -> a -> s a
 
-data Ord a => BTree a = BTEmpty | BTree {
+data Ord a => BTree a = Nil | BTree {
     left :: BTree a,
     right :: BTree a,
     ele :: a
 } deriving (Show, Read)
 
-singlebtree :: (Ord a) => a -> BTree a
-singlebtree a = BTree {
-    left = BTEmpty,
-    right = BTEmpty,
+singleton :: (Ord a) => a -> BTree a
+singleton a = BTree {
+    left = Nil,
+    right = Nil,
     ele = a
 } 
 
 instance Set BTree where
-    nullset = BTEmpty
-    member BTEmpty x = False
+    null = Nil
+    member Nil x = False
     member BTree {left=tl, right=tr, ele=e} x 
       | e > x = member tr x
       | e < x = member tl x
       | otherwise = True
-    insert BTEmpty x = singlebtree x
+    insert Nil x = singleton x
     insert BTree {left=tl, right=tr, ele=e} x
       | e < x = BTree {left=tl, right=insert tr x, ele=e}
       | e > x = BTree {left=insert tl x, right=insert tr x, ele=e}

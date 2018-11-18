@@ -1,46 +1,47 @@
 import Test.HUnit
-import PurelyFunctional
+import qualified Stack
+import qualified Set
 import Prelude hiding (empty, isEmpty, cons, head, tail)
 
-myList1  = singleton 1
-myList2  = 4 `cons` (3 `cons` (2 `cons` myList1))
-myList3  = 3 `cons` (2 `cons` myList1)
-myList4  = 3 `cons` (3 `cons` myList1)
+myList1  = Stack.singleton 1
+myList2  = 4 `Stack.cons` (3 `Stack.cons` (2 `Stack.cons` myList1))
+myList3  = 3 `Stack.cons` (2 `Stack.cons` myList1)
+myList4  = 3 `Stack.cons` (3 `Stack.cons` myList1)
 
 testHello =
     TestCase $ assertEqual "Testing basic import"
-    (someFunc) (someFunc)
+    (Stack.someFunc) (Stack.someFunc)
 
 testHead =
     TestCase $ assertEqual "Test List: Head"
-    4 (head myList2)
+    4 (Stack.head myList2)
 
 testTail =
     TestCase $ assertEqual "Test List: Tail"
-    (myList3) (tail myList2)
+    (myList3) (Stack.tail myList2)
 
 testIsEmpty = 
     TestCase $ assertEqual "Test List: IsEmpty"
-    (False) (isEmpty myList1)
+    (False) (Stack.isEmpty myList1)
 
 testIsEmpty2 = 
     TestCase $ assertEqual "Test List: IsEmpty 2"
-    (True) (isEmpty SEmpty)
+    (True) (Stack.isEmpty Stack.Nil)
 
 testUpdate =
     TestCase $ assertEqual "Test List: Update List"
-    (myList4) (update myList3 3 1)
+    (myList4) (Stack.update myList3 3 1)
 
-mySet1 = singlebtree 1
-mySet3 = insert (insert mySet1 2) 3
+mySet1 = Set.singleton 1
+mySet3 = Set.insert (Set.insert mySet1 2) 3
 
 testSetMember = 
     TestCase $ assertEqual "Test List: Member Set"
-    (True) (member mySet3 1)
+    (True) (Set.member mySet3 1)
 
 testSetMember2 = 
     TestCase $ assertEqual "Test List: Member Set"
-    (False) (member mySet3 4)
+    (False) (Set.member mySet3 4)
 main :: IO Counts
 main = runTestTT $ TestList [ testHello, testHead, testTail, testIsEmpty, testIsEmpty2,
     testUpdate, testSetMember, testSetMember2 ]

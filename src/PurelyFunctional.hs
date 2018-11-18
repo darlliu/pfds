@@ -4,6 +4,6 @@ module PurelyFunctional
  module Set
 )
 where
-import Stack
-import Set
+import qualified Stack
+import qualified Set
 ;
